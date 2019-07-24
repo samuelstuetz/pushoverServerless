@@ -1,0 +1,11 @@
+{
+  "name": "pushover",
+  "description": "",
+  "version": "0.1.0",
+  "dependencies": {
+    "pushover-notifications": "^1.2.0"
+  },
+  "devDependencies": {
+    "serverless-aws-alias": "^1.7.2"
+  }
+}

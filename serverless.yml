@@ -1,0 +1,66 @@
+service: pushover 
+
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  region: eu-central-1
+
+  # no iam need
+custom:
+  alias1:
+    environment:
+      PUSHOVER_USER: ${process.env.PUSHOVER_USER}
+      PUSHOVER_TOKEN: ${process.env.PUSHOVER_TOKEN}
+  alias2:
+    environment:
+      PUSHOVER_USER: k1
+      PUSHOVER_TOKEN: k2
+
+# you can overwrite defaults here
+#  stage: dev
+#  region: eu-central-1
+
+# you can define service wide environment variables here
+#  environment:
+#    variable1: value1
+
+functions:
+  hello:
+    handler: handler.pushover_send
+
+#    The following are a few example events you can configure
+#    NOTE: Please make sure to change your handler code to work with those events
+#    Check the event documentation for details
+#    events:
+#      - s3: ${env:BUCKET}
+#      - sns: greeter-topic
+#      - cloudwatchEvent:
+#          event:
+#            source:
+#              - "aws.ec2"
+#            detail-type:
+#              - "EC2 Instance State-change Notification"
+#            detail:
+#              state:
+#                - pending
+#      - cloudwatchLog: '/aws/lambda/hello'
+
+   environment:
+     PUSHOVER_USER: ${process.env.SERVERLESS_ALIAS}
+     PUSHOVER_TOKEN: ${process.env.SERVERLESS_ALIAS}
+
+# you can add CloudFormation resource templates here
+#resources:
+#  Resources:
+#    NewResource:
+#      Type: AWS::S3::Bucket
+#      Properties:
+#        BucketName: my-new-bucket
+#  Outputs:
+#     NewOutput:
+#       Description: "Description for the output"
+#       Value: "Some output value"
+
+plugins:
+  - serverless-aws-alias
